@@ -16,7 +16,8 @@ express()
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('index'))
   .post("/test/", (req, res) => res.json({ test: "test" }))
-  .post("/linediscord/", line.middleware(config), (req, res) => lineBot(req, res))
+  .post("/line/", line.middleware(config), (req, res) => lineBot(req, res))
+  .post("/discord/", (req, res) => discordbot(req, res))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 function lineBot(req, res) {
@@ -26,7 +27,6 @@ function lineBot(req, res) {
     const ev = events[i];
     echoman(ev);
   }
-  console.log("OK");
 }
 
 async function echoman(ev) {
@@ -40,14 +40,14 @@ async function echoman(ev) {
 var myname = "LineDiscord";
 var master = "akatsuki1910";
 
-DiscordClient.on('message', message => {
-    if(message.content === "!test") {
-        author = message.author.username;
-        if (author === master) {
-            var dateStr = new Date().toLocaleString();
-            message.channel.send({embed: {color: 2550000,description: dateStr + "\nThis is test text"}});
-        }
+function discordbot(req, res){
+  res.status(200).end();
+  if(res.content === "!test") {
+    author = res.author.username;
+    if (author === master) {
+        var dateStr = new Date().toLocaleString();
+        res.channel.send({embed: {color: 2550000,description: dateStr + "\nThis is test text"}});
     }
-});
-
-DiscordClient.login(token);
+  }
+}
+//DiscordClient.login(token);

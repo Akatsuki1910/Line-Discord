@@ -30,7 +30,7 @@ express()
   .set('views', __dirname + '/pages')
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('index'))
-  .post("/test/", (req, res) => res.json({ test: token }))
+  .post("/test/", (req, res) => res.send(token))
   .post("/linediscord/", line.middleware(config), (req, res) => lineBot(req, res))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 

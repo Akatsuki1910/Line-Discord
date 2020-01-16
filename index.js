@@ -3,7 +3,7 @@ const PORT = process.env.PORT || 5000;
 const line = require("@line/bot-sdk");
 const Discord = require('discord.js');
 const DiscordClient = new Discord.Client();
-const token = process.DISCORD_TOKEN;
+const token = process.env.DISCORD_TOKEN;
 
 const config = {
   channelAccessToken: process.env.ACCESS_TOKEN,

@@ -24,13 +24,13 @@ DiscordClient.on('message', message => {
     MessageChannel = message.channel;
     MessageChannel.send("設定しました");
   }else{
-    if(MessageChannel == message.channel){
-      MessageFlg = false;
+    if(MessageChannel == message.channel && MessageFlg){
       LineClient.pushMessage(LineGroupId, {
         type: "text",
         text: `${message.content}`
       });
     }
+    MessageFlg = true;
   }
 });
 
@@ -61,9 +61,7 @@ function echoman(ev) {
       text: "準備完了しました"
     });
   }else{
-    if(MessageFlg){
-      MessageChannel.send(ev.message.text);
-    }
-    MessageFlg = true;
+    MessageChannel.send(ev.message.text);
+    MessageFlg = false;
   }
 }

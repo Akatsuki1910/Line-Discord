@@ -48,6 +48,6 @@ async function echoman(ev) {
   const pro =  await LineClient.getProfile(ev.source.userId);
   return LineClient.replyMessage(ev.replyToken, {
     type: "text",
-    text: `${pro.displayName}さん、今「${ev.message.text}」って言いました？`
+    text: `test ${ev.replyToken}`
   });
 }

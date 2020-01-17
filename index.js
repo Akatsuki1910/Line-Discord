@@ -15,14 +15,18 @@ const myname = "LineDiscord";
 const master = "akatsuki1910";
 
 let LineGroupId = "";
+let MessageChannel = "";
 
 DiscordClient.on('message', message => {
   if(message.content === "!test") {
-      author = message.author.username;
-      if (author === master) {
-          var dateStr = new Date().toLocaleString();
-          message.channel.send({embed: {color: 2550000,description: dateStr + "\nThis is test text"}});
-      }
+    author = message.author.username;
+    if (author === master) {
+        var dateStr = new Date().toLocaleString();
+        message.channel.send({embed: {color: 2550000,description: dateStr + "\nThis is test text"}});
+    }
+  }else if(message.content === "!set"){
+    MessageChannel = message.channel;
+    MessageChannel.send("設定しました");
   }else{
     LineClient.pushMessage(LineGroupId, {
       type: "text",

@@ -63,7 +63,5 @@ function echoman(ev) {
       type: "text",
       text: "準備完了しました"
     });
-  }else{
-    MessageChannel.send(ev.source.userId);
   }
 }

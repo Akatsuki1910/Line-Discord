@@ -46,7 +46,7 @@ function lineBot(req, res) {
 
 async function echoman(ev) {
   const pro =  await LineClient.getProfile(ev.source.userId);
-  return LineClient.pushMessage(ev.source.userId, {
+  return LineClient.pushMessage(ev.source.groupId, {
     type: "text",
     text: `test ${ev.source.userId}`
   });

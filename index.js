@@ -14,6 +14,8 @@ const LineClient = new line.Client(config);
 const myname = "LineDiscord";
 const master = "akatsuki1910";
 
+let LineGroupId = "";
+
 DiscordClient.on('message', message => {
   if(message.content === "!test") {
       author = message.author.username;
@@ -21,6 +23,11 @@ DiscordClient.on('message', message => {
           var dateStr = new Date().toLocaleString();
           message.channel.send({embed: {color: 2550000,description: dateStr + "\nThis is test text"}});
       }
+  }else{
+    LineClient.pushMessage(LineGroupId, {
+      type: "text",
+      text: `${message.content}`
+    });
   }
 });
 
@@ -41,13 +48,14 @@ function lineBot(req, res) {
     const ev = events[i];
     echoman(ev);
   }
-  console.log("OK");
 }
 
-async function echoman(ev) {
-  const pro =  await LineClient.getProfile(ev.source.userId);
-  return LineClient.pushMessage(ev.source.groupId, {
-    type: "text",
-    text: `test ${ev.source.userId}`
-  });
+function echoman(ev) {
+  if(ev.message.text == "!set"){
+    LineGroupId = ev.source.groupId;
+    LineClient.pushMessage(LineGroupId, {
+      type: "text",
+      text: "準備完了しました"
+    });
+  }
 }

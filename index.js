@@ -11,19 +11,15 @@ const config = {
 };
 const LineClient = new line.Client(config);
 
-const myname = "LineDiscord";
-const master = "akatsuki1910";
-
 let LineGroupId = "";
 let MessageChannel = "";
 
+let MessageFlg = true;
+
 DiscordClient.on('message', message => {
   if(message.content === "!test") {
-    author = message.author.username;
-    if (author === master) {
-        var dateStr = new Date().toLocaleString();
-        message.channel.send({embed: {color: 2550000,description: dateStr + "\nThis is test text"}});
-    }
+    var dateStr = new Date().toLocaleString();
+    message.channel.send({embed: {color: 2550000,description: dateStr + "\nThis is test text"}});
   }else if(message.content === "!set"){
     MessageChannel = message.channel;
     MessageChannel.send("設定しました");
@@ -33,6 +29,7 @@ DiscordClient.on('message', message => {
         type: "text",
         text: `${message.content}`
       });
+      MessageFlg = false;
     }
   }
 });
@@ -63,5 +60,8 @@ function echoman(ev) {
       type: "text",
       text: "準備完了しました"
     });
+  }else{
+    if(MessageFlg) MessageChannel.send(ev.message.text);
+    MessageFlg = true;
   }
 }

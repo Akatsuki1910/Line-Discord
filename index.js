@@ -25,11 +25,11 @@ DiscordClient.on('message', message => {
     MessageChannel.send("設定しました");
   }else{
     if(MessageChannel == message.channel){
+      MessageFlg = false;
       LineClient.pushMessage(LineGroupId, {
         type: "text",
         text: `${message.content}`
       });
-      MessageFlg = false;
     }
   }
 });
@@ -61,7 +61,9 @@ function echoman(ev) {
       text: "準備完了しました"
     });
   }else{
-    MessageChannel.send(ev.message.text);
+    if(MessageFlg){
+      MessageChannel.send(ev.message.text);
+    }
     MessageFlg = true;
   }
 }

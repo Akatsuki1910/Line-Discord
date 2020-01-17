@@ -61,9 +61,7 @@ function echoman(ev) {
       text: "準備完了しました"
     });
   }else{
-    if(MessageFlg){
-      MessageChannel.send(ev.message.text);
-    }
+    MessageChannel.send(ev.message.text);
     MessageFlg = true;
   }
 }

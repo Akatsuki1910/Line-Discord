@@ -48,6 +48,6 @@ async function echoman(ev) {
   const pro =  await LineClient.getProfile(ev.source.userId);
   return LineClient.replyMessage(ev.replyToken, {
     type: "text",
-    text: `test ${ev.source}`
+    text: `test ${ev.source.userId}`
   });
 }

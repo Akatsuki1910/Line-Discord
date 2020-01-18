@@ -27,7 +27,7 @@ DiscordClient.on("message", message => {
     if(MessageChannel === message.channel && MessageFlg){
       LineClient.pushMessage(LineGroupId, {
         type: "text",
-        text: `${message}`
+        text: `${message.content}`
       });
     }
     MessageFlg = true;

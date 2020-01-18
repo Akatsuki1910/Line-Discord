@@ -29,6 +29,7 @@ DiscordClient.on("message", message => {
         type: "text",
         text: `${message.content}`
       });
+      console.log(message.content);
     }
     MessageFlg = true;
   }
